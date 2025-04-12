@@ -13,6 +13,12 @@ music-platform/
 │   ├── app.yaml                # 应用配置
 │   ├── database.yaml           # 数据库配置
 │   └── redis.yaml              # Redis 配置
+├── initialize/                       # 初始化
+│   ├── init_all.go             # 调用包内所有模块的初始化函数
+│   ├── init_oss.go             # 初始化oss配置
+│   ├── init_db.go              # 初始化数据库
+│   ├── init_redis.go           # 初始化 Redis
+│   └── init_config.go          # 初始化配置
 ├── internal/                   # 内部实现逻辑
 │   ├── auth/                   # 用户认证模块
 │   │   ├── handler.go          # 登录/注册接口处理
