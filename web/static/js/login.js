@@ -15,6 +15,7 @@ document.getElementById("loginForm").addEventListener("submit", function (e) {
         .then(data => {
             if (data.success) {
                 // 登录成功，跳转到 music.html 页面
+                localStorage.setItem('token', data.token); 
                 window.location.href = "/music";
             } else {
                 alert("登录失败：" + data.message);

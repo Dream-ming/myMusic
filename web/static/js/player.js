@@ -7,6 +7,43 @@ const playPauseBtn = document.getElementById("play-pause-btn");
 const currentTimeElem = document.getElementById("current-time");
 const totalTimeElem = document.getElementById("total-time");
 const progressBarFill = document.querySelector(".progress-bar-fill");
+const writeCommentBtn = document.getElementById("write-comment-btn");
+const commentModal = document.getElementById("comment-modal");
+const commentInput = document.getElementById("comment-input");
+const submitCommentBtn = document.getElementById("submit-comment-btn");
+const cancelCommentBtn = document.getElementById("cancel-comment-btn");
+const commentsContainer = document.getElementById("comments");
+
+// 打开评论输入框
+writeCommentBtn.addEventListener("click", () => {
+    commentModal.classList.remove("hidden");
+    commentInput.focus();
+});
+
+// 关闭评论输入框
+cancelCommentBtn.addEventListener("click", () => {
+    commentModal.classList.add("hidden");
+    commentInput.value = ""; // 清空输入框
+});
+
+// 提交评论
+submitCommentBtn.addEventListener("click", () => {
+    const commentText = commentInput.value.trim();
+    if (commentText) {
+        // 添加评论到评论列表
+        const commentElem = document.createElement("div");
+        commentElem.className = "comment";
+        commentElem.innerHTML = `
+            <p class="username">用户：</p>
+            <p class="content">${commentText}</p>
+        `;
+        commentsContainer.prepend(commentElem); // 新评论显示在最前面
+        commentModal.classList.add("hidden");
+        commentInput.value = ""; // 清空输入框
+    } else {
+        alert("评论内容不能为空！");
+    }
+});
 
 // 音频对象
 const audio = new Audio();

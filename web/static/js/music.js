@@ -4,12 +4,21 @@ document.getElementById("sidebarToggle").addEventListener("click", () => {
     sidebar.classList.toggle("hidden"); // 切换隐藏/显示
 });
 
+const token = localStorage.getItem('token');
+if (!token) {
+    console.error("Token未找到，请先登录");
+}
+
 // 加载用户信息
-fetch("/api/user/info")
+fetch("/api/user/info", {
+    headers: {
+        'Authorization': `Bearer ${token}`
+    }
+})
     .then(res => res.json())
     .then(data => {
-        document.getElementById("userId").textContent = data.id;
-        document.getElementById("userAge").textContent = data.age;
+        document.getElementById("userName").textContent = data.user_name;
+        document.getElementById("userAge").textContent = `${data.days_registered} 天`;
     })
     .catch(err => {
         console.error("加载用户信息失败:", err);

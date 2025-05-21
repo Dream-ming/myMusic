@@ -47,9 +47,24 @@
 
     <!-- 用户评论部分 -->
     <div class="comments-section">
-        <h3>用户评论</h3>
+        <div class="comments-header">
+            <h3>用户评论</h3>
+            <button id="write-comment-btn" class="control-btn">写评论</button>
+        </div>
         <div class="comments-container" id="comments">
             <p>评论加载中...</p>
+        </div>
+    </div>
+    
+    <!-- 评论输入框 -->
+    <div id="comment-modal" class="modal hidden">
+        <div class="modal-content">
+            <h4>写评论</h4>
+            <textarea id="comment-input" placeholder="输入你的评论..."></textarea>
+            <div class="modal-actions">
+                <button id="submit-comment-btn" class="control-btn">提交</button>
+                <button id="cancel-comment-btn" class="control-btn secondary">取消</button>
+            </div>
         </div>
     </div>
 
