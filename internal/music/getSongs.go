@@ -7,8 +7,6 @@ import (
     "github.com/Dream-ming/myMusic/initialize"
 )
 
-// var DB = initialize.DB
-
 type Song struct {
 	ID          uint64         `json:"id"`
 	Name        string         `json:"name"`        // 可为 NULL

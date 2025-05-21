@@ -15,13 +15,17 @@ fetch("/api/user/info")
         console.error("加载用户信息失败:", err);
     });
 
-// 退出登录
-document.getElementById("logoutBtn").addEventListener("click", () => {
-    fetch("/api/logout", { method: "POST" })
-        .then(() => window.location.href = "/login")
-        .catch(err => {
-            console.error("退出登录失败:", err);
-        });
+// // 退出登录
+// document.getElementById("logoutBtn").addEventListener("click", () => {
+//     fetch("/api/logout", { method: "POST" })
+//         .then(() => window.location.href = "/login")
+//         .catch(err => {
+//             console.error("退出登录失败:", err);
+//         });
+// });
+
+document.getElementById('logoutBtn').addEventListener('click', function () {
+    window.location.href = '/login';
 });
 
 // 搜索歌曲

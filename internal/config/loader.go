@@ -9,3 +9,15 @@ func LoadOSSConfig() {
 	viper.AddConfigPath("./configs")
 	viper.MergeInConfig()
 }
+
+func LoadMySQLConfig() {
+	viper.SetConfigName("sql")
+	viper.AddConfigPath("./configs")
+	viper.MergeInConfig()
+}
+
+func LoadJWTConfig() {
+	viper.SetConfigName("jwt")
+	viper.AddConfigPath("./configs")
+	viper.MergeInConfig()
+}

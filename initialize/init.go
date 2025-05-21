@@ -7,6 +7,8 @@ import (
 func InitAll() {
 	
 	config.LoadOSSConfig()
+	config.LoadMySQLConfig()
+	config.LoadJWTConfig()
 	
 	oss_init()
 	mysql_init()

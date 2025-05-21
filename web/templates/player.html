@@ -32,14 +32,19 @@
         </div>
     </div>
 
-    <!-- 播放器控制（可选功能） -->
-    <div class="player-controls">
-        <button id="prev-btn">上一首</button>
-        <button id="play-pause-btn">播放 / 暂停</button>
-        <button id="next-btn">下一首</button>
+    <!-- 播放器控制 -->
+    <div class="player-bar">
+        <button id="play-pause-btn">▶️ 播放</button>
+        <div class="progress-container">
+            <span id="current-time" class="time-label">00:00</span>
+            <div class="progress-bar">
+                <div class="progress-bar-fill"></div>
+            </div>
+            <span id="total-time" class="time-label">00:00</span>
+        </div>
     </div>
-
     
+
     <!-- 用户评论部分 -->
     <div class="comments-section">
         <h3>用户评论</h3>
@@ -47,7 +52,6 @@
             <p>评论加载中...</p>
         </div>
     </div>
-
 
     <!-- 引入脚本 -->
     <script src="/static/js/player.js"></script>

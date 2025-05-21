@@ -13,7 +13,24 @@ function register() {
         return;
     }
 
-    // 示例：这里将来你会用 fetch 调用后端注册 API
-    alert("注册成功！欢迎你，" + username);
-    window.location.href = "/login";
+    // 使用 fetch 调用后端注册 API
+    fetch("/api/user/register", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ username, password })
+    })
+        .then(res => res.json())
+        .then(data => {
+            if (data.success) {
+                alert("注册成功！欢迎你，" + username);
+                window.location.href = "/login";
+            } else {
+                alert("注册失败：" + (data.message || data.error || "未知错误"));
+            }
+        })
+        .catch(err => {
+            alert("请求失败：" + err);
+        });
 }
