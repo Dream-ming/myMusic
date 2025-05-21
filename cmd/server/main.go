@@ -1,22 +1,22 @@
 package main
 
 import (
-	// "github.com/gin-gonic/gin"
+	// "encoding/json"
 	// "net/http"
+
 	"github.com/Dream-ming/myMusic/initialize"
+	"github.com/Dream-ming/myMusic/router"
+	"github.com/gin-gonic/gin"
 )
 
 func main() {
 
-	// r := gin.Default()
-	// r.GET("/ping",func(c *gin.Context){
-	// 	c.JSON(http.StatusOK,gin.H{
-	// 		"code":200,
-	// 		"msg":"pong",
-	// 	})
-	// })
-	// r.Run(":8888")
+	r := gin.Default()
+	
+	router.RegisterRouters(r)
 
 	initialize.InitAll()
+
+	r.Run(":8888")
 
 }

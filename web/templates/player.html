@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>播放歌曲 - 可达鸭音乐平台</title>
+    <link rel="icon" href="/static/favicon/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/static/css/base.css">
+    <link rel="stylesheet" href="/static/css/player.css" />
+</head>
+
+<body>
+    <div class="player-container">
+        <!-- 左侧封面图片 -->
+        <div class="left">
+            <img src="/static/images/default-cover.jpg" alt="歌曲封面" class="cover-image" />
+        </div>
+
+        <!-- 右侧歌曲信息和歌词 -->
+        <div class="right">
+            <!-- 歌曲信息部分 -->
+            <div class="song-info">
+                <h2 class="song-title">加载中...</h2>
+                <p class="song-author">演唱者：加载中...</p>
+            </div>
+
+            <!-- 歌词部分 -->
+            <div class="lyrics" id="lyrics">
+                <p>歌词加载中...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 播放器控制（可选功能） -->
+    <div class="player-controls">
+        <button id="prev-btn">上一首</button>
+        <button id="play-pause-btn">播放 / 暂停</button>
+        <button id="next-btn">下一首</button>
+    </div>
+
+    
+    <!-- 用户评论部分 -->
+    <div class="comments-section">
+        <h3>用户评论</h3>
+        <div class="comments-container" id="comments">
+            <p>评论加载中...</p>
+        </div>
+    </div>
+
+
+    <!-- 引入脚本 -->
+    <script src="/static/js/player.js"></script>
+</body>
+
+</html>

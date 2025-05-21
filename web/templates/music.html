@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <title>音乐平台主页</title>
+    <link rel="icon" href="/static/favicon/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/static/css/music.css">
+</head>
+
+<body>
+    <header class="navbar">
+        <button id="sidebarToggle" class="menu-btn">☰</button>
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="搜索歌曲或歌词">
+            <button id="searchBtn">搜索</button>
+        </div>
+    </header>
+
+    <aside id="sidebar" class="sidebar hidden">
+        <div class="user-info">
+            <p>ID: <span id="userId">loading...</span></p>
+            <p>注册年龄: <span id="userAge">loading...</span></p>
+            <button id="logoutBtn">退出登录</button>
+        </div>
+    </aside>
+
+    <main class="content">
+        <section class="song-list">
+            <h2>历史最热歌曲</h2>
+            <ul id="historyTopSongs"></ul>
+        </section>
+
+        <section class="song-list">
+            <h2>今日最热歌曲</h2>
+            <ul id="todayTopSongs"></ul>
+        </section>
+    </main>
+
+    <script src="/static/js/music.js"></script>
+</body>
+
+</html>
