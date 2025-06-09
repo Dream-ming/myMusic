@@ -14,7 +14,7 @@ func GetUserInfo(c *gin.Context) {
 		return
 	}
 
-	userID, ok := userIDVal.(uint64)
+	userID, ok := userIDVal.(int)
 	if !ok {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "用户ID类型转换失败"})
 		return

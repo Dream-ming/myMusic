@@ -8,8 +8,8 @@ import(
     "github.com/Dream-ming/myMusic/initialize"
 )
 
-func Login(username, password string) (uint64, error) {
-	var id uint64
+func Login(username, password string) (int, error) {
+	var id int
 	var hashedPwd string
 	err := initialize.DB.QueryRow("SELECT id, password_hash FROM user WHERE username=?", username).Scan(&id, &hashedPwd)
 	if err == sql.ErrNoRows {

@@ -15,4 +15,5 @@ func RegisterRouters(r *gin.Engine) {
 	user_router(r)
 	music_router(r)
 	player_router(r)
+	comment_router(r)
 }

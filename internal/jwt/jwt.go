@@ -10,11 +10,11 @@ import (
 var jwtKey = []byte(viper.GetString("jwt.secret")) // 可以放到配置中
 
 type Claims struct {
-	UserID uint64 `json:"user_id"`
+	UserID int `json:"user_id"`
 	jwt.RegisteredClaims
 }
 
-func GenerateToken(userID uint64) (string, error) {
+func GenerateToken(userID int) (string, error) {
 	claims := Claims{
 		UserID: userID,
 		RegisteredClaims: jwt.RegisteredClaims{

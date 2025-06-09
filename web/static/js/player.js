@@ -2,11 +2,17 @@
 const urlParams = new URLSearchParams(window.location.search);
 const songId = urlParams.get("id");
 
-// DOM 元素
 const playPauseBtn = document.getElementById("play-pause-btn");
 const currentTimeElem = document.getElementById("current-time");
 const totalTimeElem = document.getElementById("total-time");
 const progressBarFill = document.querySelector(".progress-bar-fill");
+
+const token = localStorage.getItem('token');
+if (!token) {
+    alert("请先登录后再操作！");
+    window.location.href = "/login"; // 跳转到登录页面
+}
+
 const writeCommentBtn = document.getElementById("write-comment-btn");
 const commentModal = document.getElementById("comment-modal");
 const commentInput = document.getElementById("comment-input");
@@ -14,13 +20,11 @@ const submitCommentBtn = document.getElementById("submit-comment-btn");
 const cancelCommentBtn = document.getElementById("cancel-comment-btn");
 const commentsContainer = document.getElementById("comments");
 
-// 打开评论输入框
 writeCommentBtn.addEventListener("click", () => {
     commentModal.classList.remove("hidden");
     commentInput.focus();
 });
 
-// 关闭评论输入框
 cancelCommentBtn.addEventListener("click", () => {
     commentModal.classList.add("hidden");
     commentInput.value = ""; // 清空输入框
@@ -29,20 +33,113 @@ cancelCommentBtn.addEventListener("click", () => {
 // 提交评论
 submitCommentBtn.addEventListener("click", () => {
     const commentText = commentInput.value.trim();
-    if (commentText) {
-        // 添加评论到评论列表
+    if (!commentText) {
+        alert("评论内容不能为空！");
+        return;
+    }
+
+    if (!songId) {
+        alert("未能获取歌曲 ID，请刷新页面重试！");
+        return;
+    }
+
+    // 发送评论请求
+    fetch("/api/comment/push_comment", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        },
+        body: JSON.stringify({
+            song_id: parseInt(songId, 10),
+            content: commentText
+        })
+    })
+        .then((res) => {
+            if (!res.ok) {
+                return res.json().then((data) => {
+                    throw new Error(data.error || "提交评论失败");
+                });
+            }
+            return res.json();
+        })
+        .then(() => {
+            commentModal.classList.add("hidden"); // 隐藏评论输入框
+            commentInput.value = ""; // 清空输入框
+            loadComments(); // 重新加载评论
+        })
+        .catch((err) => {
+            console.error("提交评论失败：", err);
+            alert(err.message || "提交评论失败，请稍后重试！");
+        });
+});
+
+// 渲染评论列表
+function renderComments(comments) {
+    commentsContainer.innerHTML = ""; // 清空现有评论
+    comments.forEach((comment) => {
         const commentElem = document.createElement("div");
         commentElem.className = "comment";
         commentElem.innerHTML = `
-            <p class="username">用户：</p>
-            <p class="content">${commentText}</p>
+            <span class="username">${comment.user_name || "匿名用户"}</span>
+            <span class="content">${comment.content}</span>
+            <span class="time">${formatTimeForComments(comment.created_at)}</span>
         `;
-        commentsContainer.prepend(commentElem); // 新评论显示在最前面
-        commentModal.classList.add("hidden");
-        commentInput.value = ""; // 清空输入框
-    } else {
-        alert("评论内容不能为空！");
+        commentsContainer.appendChild(commentElem);
+    });
+}
+
+// 格式化评论时间
+function formatTimeForComments(timestamp) {
+    const date = new Date(timestamp);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    const hours = String(date.getHours()).padStart(2, "0");
+    const minutes = String(date.getMinutes()).padStart(2, "0");
+    return `${year}-${month}-${day} ${hours}:${minutes}`;
+}
+
+// 加载评论
+function loadComments() {
+    if (!songId) {
+        alert("未能加载歌曲评论，请返回重试！");
+        return;
     }
+
+    fetch("/api/comment/query_comment", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        },
+        body: JSON.stringify({
+            song_id: parseInt(songId, 10)
+        })
+    })
+        .then((res) => {
+            if (!res.ok) {
+                throw new Error("加载评论失败");
+            }
+            return res.json();
+        })
+        .then((comments) => {
+            if (!Array.isArray(comments)) {
+                console.error("评论数据格式不正确：", comments);
+                alert("加载评论失败，请稍后再试！");
+                return;
+            }
+            renderComments(comments); // 渲染评论列表
+        })
+        .catch((err) => {
+            console.error("加载评论失败：", err);
+            alert("加载评论失败，请稍后再试！");
+        });
+}
+
+// 页面加载时获取评论
+document.addEventListener("DOMContentLoaded", () => {
+    loadComments(); // 加载评论
 });
 
 // 音频对象

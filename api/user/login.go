@@ -24,7 +24,7 @@ func Login(ctx *gin.Context) {
 		ctx.JSON(http.StatusUnauthorized, gin.H{"error": err.Error()})
 		return
 	}
-	token, err := jwt.GenerateToken(uint64(userID))
+	token, err := jwt.GenerateToken(userID)
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": "生成JWT错误"})
 		return

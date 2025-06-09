@@ -13,7 +13,7 @@ function register() {
         return;
     }
 
-    // 使用 fetch 调用后端注册 API
+    
     fetch("/api/user/register", {
         method: "POST",
         headers: {

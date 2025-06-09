@@ -1,3 +1,4 @@
+/* 基础样式设置 */
 * {
     margin: 0;
     padding: 0;
@@ -11,6 +12,7 @@ body {
     padding: 2rem;
 }
 
+/* 播放器整体布局 */
 .player-container {
     display: flex;
     max-width: 1200px;
@@ -21,8 +23,6 @@ body {
     border-radius: 10px;
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
     align-items: stretch;
-
-    /* 设置统一高度，封面与歌词等高 */
     height: 500px;
 }
 
@@ -78,7 +78,7 @@ body {
     background-color: #f9f9f9;
 }
 
-/* 美化滚动条（现代浏览器支持） */
+/* 滚动条美化 */
 .lyrics::-webkit-scrollbar {
     width: 6px;
 }
@@ -92,6 +92,7 @@ body {
     background-color: transparent;
 }
 
+/* 播放器控制栏 */
 .player-controls {
     max-width: 1200px;
     margin: 1rem auto;
@@ -125,6 +126,7 @@ body {
     color: #333;
 }
 
+/* 评论区样式 */
 .comments-section {
     max-width: 1200px;
     margin: 2rem auto;
@@ -159,6 +161,47 @@ body {
 
 #write-comment-btn:hover {
     background-color: #0056b3;
+}
+
+.comments-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.comment {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+    padding: 0.5rem 0;
+}
+
+.comment .username {
+    font-weight: bold;
+    color: #333;
+    flex: 1;
+    margin-right: 1rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.comment .content {
+    flex: 2;
+    color: #555;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-right: 1rem;
+}
+
+.comment .time {
+    flex-shrink: 0;
+    font-size: 0.9rem;
+    color: #999;
+    white-space: nowrap;
 }
 
 /* 模态框样式 */
@@ -213,28 +256,6 @@ body {
     background-color: #e0e0e0;
 }
 
-.comments-section h3 {
-    font-size: 1.4rem;
-    margin-bottom: 1rem;
-    color: #222;
-}
-
-.comment {
-    margin-bottom: 1rem;
-    border-bottom: 1px solid #eee;
-    padding-bottom: 0.5rem;
-}
-
-.username {
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 0.25rem;
-}
-
-.content {
-    color: #555;
-}
-
 @media (max-width: 600px) {
     .player-bar {
         flex-direction: column;
@@ -270,9 +291,7 @@ body {
     padding: 10px 0;
     display: flex;
     justify-content: center;
-    /* 横向居中 */
     align-items: center;
-    /* 纵向居中 */
     box-sizing: border-box;
 }
 

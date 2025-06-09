@@ -3,7 +3,7 @@ package user
 import (
 	"net/http"
 	"strings"
-	
+	"log"
 	"github.com/gin-gonic/gin"
 	"github.com/Dream-ming/myMusic/internal/jwt"
 )
@@ -26,6 +26,7 @@ func JWTAuthMiddleware() gin.HandlerFunc {
 		}
 
 		c.Set("userID", claims.UserID)
+		log.Print(claims.UserID)
 		c.Next()
 	}
 }

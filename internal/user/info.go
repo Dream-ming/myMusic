@@ -10,14 +10,14 @@ import (
 
 // UserInfo 是返回给前端的结构体
 type UserInfo struct {
-	UserID         uint64 `json:"user_id"`
+	UserID         int    `json:"user_id"`
 	Username       string `json:"user_name"`
 	RegisteredAt   string `json:"registered_at"`
 	DaysRegistered int    `json:"days_registered"`
 }
 
 // GetUserInfo 通过 userID 获取用户信息
-func GetUserInfo(userID uint64) (*UserInfo, error) {
+func GetUserInfo(userID int) (*UserInfo, error) {
 	var username string
 	var createdAt time.Time
 
